@@ -1,0 +1,18 @@
+<alps version="1.0">
+  <doc format="text">GUNet SSN (AMKA) API base profile</doc>
+  <link rel="help" href="https://redmine.gunet.gr/projects/amka-services/wiki/ValidatorAPISpec" />
+  <descriptor id="ssn" name="ssn">
+    <doc>The SSN value as text</doc>
+  </descriptor>
+  <descriptor id="ssn-entry" name="ssn">
+    <doc>An object representing a particular SSN entry in a collection
+      accesible through URLs.</doc>
+    <descriptor id="ssn-value" href="#ssn"/>
+    <descriptor id="ssn-href" href="http://alps.io/schema.org/Thing#url"/>
+  </descriptor>
+  <!-- a collection of SSN entries -->
+  <descriptor id="ssn-collection" type="safe" name="ssn">
+    <doc>A collection of SSN entries, each with it's own URL</doc>
+    <descriptor id="ssn-item" href="#ssn-entry"/>
+  </descriptor>
+</alps>
