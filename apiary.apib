@@ -1,0 +1,72 @@
+FORMAT: 1A
+HOST: http://funhub-devel.gunet.gr/
+
+# SSN API (amka-services)
+## About this API
+This API provides a resource to view, manage and validate information
+about SSN (AMKA) numbers and their related metadata.
+
+# Home [/]
+This is the home resource.
+
+## API Discovery [GET]
+* Request (application/vnd.siren+json)
+* Response 200 (application/vnd.siren+json)
+
+        {
+          "entities": [
+            {
+              "href": "...",
+              "rel": [
+                "ssn"
+              ]
+            },
+            {
+              "href": "...",
+              "rel": [
+                "users-all"
+              ]
+            }
+          ],
+          "actions": [
+            {
+              "name": "message-post",
+              "href": "...",
+              "method": "POST",
+              "fields": [
+                {
+                  "name": "message",
+                  "type": "text"
+                }
+              ]
+            },
+            {
+              "name": "user-add",
+              "href": "...",
+              "method": "POST",
+              "fields": [
+                {
+                  "name": "user",
+                  "type": "text"
+                },
+                {
+                  "name": "email",
+                  "type": "text"
+                },
+                {
+                  "name": "password",
+                  "type": "password"
+                }
+              ]
+            }
+          ],
+          "links": [
+            {
+              "rel": [
+                "self",
+                "index"
+              ],
+              "href": "..."
+            }
+          ]
+        }
