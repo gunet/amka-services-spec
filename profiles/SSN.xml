@@ -1,5 +1,6 @@
 <alps version="1.0">
   <doc format="text">GUNet SSN (AMKA) API base profile</doc>
+  <link rel="self" href="https://git.gunet.gr/web-services/amka-services-spec/raw/master/profiles/SSN.xml" />
   <link rel="help" href="https://redmine.gunet.gr/projects/amka-services/wiki/ValidatorAPISpec" />
   <descriptor id="ssn" name="ssn">
     <doc>The SSN value as text</doc>

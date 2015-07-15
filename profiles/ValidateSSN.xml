@@ -1,0 +1,18 @@
+<alps version="1.0">
+  <doc format="text">GUNet SSN (AMKA) Validation API profile</doc>
+  <link rel="self" href="https://git.gunet.gr/web-services/amka-services-spec/raw/master/profiles/ValidateSSN.xml" />
+  <link rel="help" href="https://redmine.gunet.gr/projects/amka-services/wiki/ValidatorAPISpec" />
+  <!-- a hypermedia control for validating the existence and basic data of an SSN  -->
+  <descriptor id="validate-ssn" name="ssn" type="safe" rt="https://git.gunet.gr/web-services/amka-services-spec/raw/master/profiles/SSN#ssn-collection">
+    <doc>
+      A simple link/form for validating the existence and validity of a
+      combination of SSN, family name and birth date.  If the request data
+      validates then the result contains an array of exactly one SSN. Otherwise
+      it contains an empty array.
+    </doc>
+    <descriptor id="familyname" href="http://alps.io/schema.org/Person#familyName"/>
+    <descriptor id="birthdate" href="http://alps.io/schema.org/Person#birthDate"/>
+    <descriptor id="ssn" href="https://git.gunet.gr/web-services/amka-services-spec/raw/master/profiles/SSN#ssn" />
+  </descriptor>
+</alps>
+
