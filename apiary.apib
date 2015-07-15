@@ -35,6 +35,10 @@ This is the home resource.
                 {
                   "name": "familyName",
                   "type": "text"
+                },
+                {
+                  "name": "ssn",
+                  "type": "text"
                 }
               ]
             }
@@ -49,3 +53,18 @@ This is the home resource.
             }
           ]
         }
+
+
+# Group SSN resources
+
+# SSN Collection [/ssn/{?familyName,birthDate,ssn}]
+## Validation [GET]
++ Parameters
+    + familyName: `Παπαδόπουλος` (text, optional) - surname or family name to validate with.
+    + birthDate: `1981-05-10` (date, optional) - birth date in ISO 8061 format.
+    + ssn: `12093134234` (text) - the SSN to validate with
++ Response 200 (application/vnd.siren+json)
+
+        { "entities": [] }
+
++ Response 404
