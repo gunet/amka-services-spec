@@ -1,0 +1,68 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Documentation</title>
+</head>
+<body>
+<h1>Documentation</h1>
+<doc format="text">GUNet SSN (AMKA) API base profile</doc><ul class="link">
+<li>rel:self = <a href="https://git.gunet.gr/web-services/amka-services-spec/raw/master/profiles/SSN.xml" rel="self">https://git.gunet.gr/web-services/amka-services-spec/raw/master/profiles/SSN.xml</a>
+</li>
+<li>rel:help = <a href="https://redmine.gunet.gr/projects/amka-services/wiki/ValidatorAPISpec" rel="help">https://redmine.gunet.gr/projects/amka-services/wiki/ValidatorAPISpec</a>
+</li>
+</ul>
+  
+  
+  
+  <div class="descriptor">
+<h4 class="id" id="ssn">ssn</h4>
+<doc>The SSN value as text</doc><ul class="attributes">
+<li>id : ssn</li>
+<li>name : ssn</li>
+</ul>
+</div>
+  <div class="descriptor">
+<h4 class="id" id="ssn-entry">ssn-entry</h4>
+<doc>An object representing a particular SSN entry in a collection
+      accesible through URLs.</doc><ul class="attributes">
+<li>id : ssn-entry</li>
+<li>name : ssn</li>
+<li>Contains: <div class="descriptor">
+<h4 class="id" id="ssn-value">ssn-value</h4>
+<ul class="attributes">
+<li>id : ssn-value</li>
+<li>href : <a href="#ssn">#ssn</a>
+</li>
+</ul>
+</div>
+<div class="descriptor">
+<h4 class="id" id="ssn-href">ssn-href</h4>
+<ul class="attributes">
+<li>id : ssn-href</li>
+<li>href : <a href="http://alps.io/schema.org/Thing#url">http://alps.io/schema.org/Thing#url</a>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+  
+  <div class="descriptor">
+<h4 class="id" id="ssn-collection">ssn-collection</h4>
+<doc>A collection of SSN entries, each with it's own URL</doc><ul class="attributes">
+<li>id : ssn-collection</li>
+<li>type : safe</li>
+<li>name : ssn</li>
+<li>Contains: <div class="descriptor">
+<h4 class="id" id="ssn-item">ssn-item</h4>
+<ul class="attributes">
+<li>id : ssn-item</li>
+<li>href : <a href="#ssn-entry">#ssn-entry</a>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</body>
+</html>
