@@ -6,16 +6,23 @@ HOST: http://funhub-devel.gunet.gr/
 This API provides a resource to view, manage and validate information
 about SSN (AMKA) numbers and their related metadata.
 
+## Business Process
+Here we define what this API's purpose is, it's workflows and what are
+the paths one may follow to accomplish particular tasks.
+
+1. Check if a given SSN has been registered, optionally validating some personal attributes
+2. Retrieve a set of personal attributes associated with the given SSN
+
+## Use Cases: state transitions.
+
+1. An API client will discover the available resources by accessing the API endpoint.
+2. An API client will search for a given SSN value in the collection of registered SSN's, optionally including some personal attributes for validation.
+3. An API client will request the personal attributes of a given registered SSN.
+
 # Home [/]
-This is the home resource.
+This is the home resource. An API client
 
-## API Discovery [GET]
-* Request
-    * Headers
-    
-            Accept: application/vnd.collection+json
-
-* Response 200 (application/vnd.collection+json)
++ Model (application/vnd.collection+json)
 
         {
           "collection" :
@@ -35,12 +42,165 @@ This is the home resource.
           }
         }
 
+## API Discovery [GET]
+* Request
+    * Headers
+    
+            Accept: application/vnd.collection+json
+            Authorization: Token XXX
+
+* Response 200
+
+    [Home][]
+
 # Group SSN resources
 
 # SSN Collection [/ssn/{?familyName,birthDate,ssn}]
 A collection of SSN resources.
 
-+ Model (application/vnd.collection+json)
++ Model (application/vnd.collection+json;profile=https://git.gunet.gr/web-services/amka-services-spec/raw/master/profiles/ValidateSSN.xml)
+
+    + Parameters
+    
+        + familyName: `Παπαδόπουλος` (text, optional) - surname or family name to validate with.
+        + birthDate: `1981-05-10` (date, optional) - birth date in ISO 8061 format.
+        + ssn: `12093134234` (text) - the SSN to validate with
+        
+    + Body
+    
+            {
+              "collection" :
+              {
+                "version" : "1.0",
+                "href" : "...",
+                "items": [
+                    {
+                        "href": "...",
+                        "data": [
+                            {
+                                "name": "ssn",
+                                "value": "12093134234"
+                            }
+                        ]
+                    }
+                ],
+                "queries": [
+                    {
+                        "href": "...",
+                        "rel": "validate-ssn",
+                        "prompt": "Validate an SSN and personal attributes",
+                        "data": [
+                            {
+                                "name": "familyName",
+                                "value": ""
+                            },
+                            {
+                                "name": "birthDate",
+                                "value": ""
+                            },
+                            {
+                                "name": "ssn",
+                                "value": ""
+                            }
+                        ]
+                    }
+                ]
+              }
+            }
+
+
+## Validate SSN [GET]
+This action retrieves a list of SSN resources from the collection. Currently,
+the resource supports retrieving at most one SSN resource, based on the value
+of the `ssn` parameter. Additionally one may provide `familyName` and `birthDate` to validate the data
+against the specific SSN.
+
++ Relation: validate-ssn
+
++ Request Validate an SSN with personal attributes
+
+    + Headers
+    
+            Accept: application/vnd.collection+json
+            Authorization: Token XXX
+            
++ Response 200 
+
+    [SSN Collection][]
+    
++ Response 200
+
+    If the SSN is not registered
+   
+    + Body
+
+            {
+              "collection" :
+              {
+                "version" : "1.0",
+                "href" : "..."
+              }
+            } 
+
++ Request Fail to validate SSN's personal attributes
+    
+    + Headers
+    
+            Accept: application/vnd.collection+json
+            Authorization: Token XXX
+        
++ Response 400 (application/vnd.collection+json;profile=https://git.gunet.gr/web-services/amka-services-spec/raw/master/profiles/ValidateSSN.xml)
+
+    If the SSN is registered but the parameters provided do not validate the response contains no items and an error is reported.
+
+    + Body
+
+            {
+              "collection" :
+              {
+                "version" : "1.0",
+                "href" : "...",
+                "error": {
+                    "title" : "Invalid data",
+                    "code" : "ssnerr002,
+                    "message" : "The parameters provided to do not validate for the given SSN"  
+                }
+              }
+            }
+
+
++ Request Unauthenticated request
+    
+    + Headers
+    
+            Accept: application/vnd.collection+json
+
++ Response 403 (application/vnd.collection+json;profile=https://git.gunet.gr/web-services/amka-services-spec/raw/master/profiles/ValidateSSN.xml)
+
+    In case the client doesn't provide satisfactory authentication credentials the API responds with 403 HTTP Forbidden.
+
+    + Body
+
+            {
+              "collection" :
+              {
+                "version" : "1.0",
+                "href" : "...",
+                "error": {
+                    "title" : "Forbidden",
+                    "code" : "ssnerr001,
+                    "message" : "Valid authentication was not provided. Please try again with correct authentication."  
+                }
+              }
+            }
+
+
+# SSN Entry [/ssn/{ssn}]
+A resource for a registered SSN.
+
++ Model (application/vnd.collection+json;profile=https://git.gunet.gr/web-services/amka-services-spec/raw/master/profiles/ValidateSSN.xml)
+
+    + Body
     
             {
               "collection" :
@@ -49,35 +209,42 @@ A collection of SSN resources.
                 "href" : "...",
                 "links": [
                     {
-                        "href": "https://git.gunet.gr/web-services/amka-services-spec/raw/master/profiles/ValidateSSN.xml",
-                        "rel": "profile"
+                        "rel": "collection",
+                        "href": "..."
                     }
                 ],
-                "queries": [
-                    ...
+                "items": [
+                    {
+                        "href": "...",
+                        "data": [
+                            {
+                                "name": "ssn",
+                                "value": "12093134234"
+                            }
+                        ]
+                    }
                 ]
               }
             }
 
 ## Retrieve SSN [GET]
-This action retrieves a list of SSN resources from the collection. Currently,
-the resource supports retrieving at most one SSN resource, based on the value
-of the `ssn` parameter. Additionally one may provide `familyName` and `birthDate` to validate the data
-against the specific SSN.
+This action retrieves specific SSN resource
+
++ Relation: ssn-entry
 
 + Parameters
-    + familyName: `Παπαδόπουλος` (text, optional) - surname or family name to validate with.
-    + birthDate: `1981-05-10` (date, optional) - birth date in ISO 8061 format.
     + ssn: `12093134234` (text) - the SSN to validate with
 
 + Request
 
     + Headers
     
-            Accept: application/vnd.siren+json
+            Accept: application/vnd.collection+json
             
 + Response 200 
 
-    [SSN Collection][]
+    [SSN Entry][]
+    
++ Response 404
 
-+ Response 400
+
