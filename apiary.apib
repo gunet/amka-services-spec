@@ -10,61 +10,74 @@ about SSN (AMKA) numbers and their related metadata.
 This is the home resource.
 
 ## API Discovery [GET]
-* Request (application/vnd.siren+json)
-* Response 200 (application/vnd.siren+json)
+* Request
+    * Headers
+    
+            Accept: application/vnd.collection+json
+
+* Response 200 (application/vnd.collection+json)
 
         {
-          "entities": [
-            {
-              "href": "...",
-              "rel": [
-                "ssn"
-              ]
-            }
-          ],
-          "actions": [
-            {
-              "name": "ssn",
-              "href": "...",
-              "method": "GET",
-              "fields": [
+          "collection" :
+          {
+            "version" : "1.0",
+            "href" : "...",
+            "links": [
                 {
-                  "name": "birthDate",
-                  "type": "date"
+                    "href": "https://git.gunet.gr/web-services/amka-services-spec/raw/master/profiles/SSN.xml",
+                    "rel": "profile"
                 },
                 {
-                  "name": "familyName",
-                  "type": "text"
-                },
-                {
-                  "name": "ssn",
-                  "type": "text"
+                    "href": "...",
+                    "rel": "ssn-collection"
                 }
-              ]
-            }
-          ],
-          "links": [
-            {
-              "rel": [
-                "self",
-                "index"
-              ],
-              "href": "..."
-            }
-          ]
+            ]
+          }
         }
-
 
 # Group SSN resources
 
 # SSN Collection [/ssn/{?familyName,birthDate,ssn}]
-## Validation [GET]
+A collection of SSN resources.
+
++ Model (application/vnd.collection+json)
+    
+            {
+              "collection" :
+              {
+                "version" : "1.0",
+                "href" : "...",
+                "links": [
+                    {
+                        "href": "https://git.gunet.gr/web-services/amka-services-spec/raw/master/profiles/ValidateSSN.xml",
+                        "rel": "profile"
+                    }
+                ],
+                "queries": [
+                    ...
+                ]
+              }
+            }
+
+## Retrieve SSN [GET]
+This action retrieves a list of SSN resources from the collection. Currently,
+the resource supports retrieving at most one SSN resource, based on the value
+of the `ssn` parameter. Additionally one may provide `familyName` and `birthDate` to validate the data
+against the specific SSN.
+
 + Parameters
     + familyName: `Παπαδόπουλος` (text, optional) - surname or family name to validate with.
     + birthDate: `1981-05-10` (date, optional) - birth date in ISO 8061 format.
     + ssn: `12093134234` (text) - the SSN to validate with
-+ Response 200 (application/vnd.siren+json)
 
-        { "entities": [] }
++ Request
 
-+ Response 404
+    + Headers
+    
+            Accept: application/vnd.siren+json
+            
++ Response 200 
+
+    [SSN Collection][]
+
++ Response 400
