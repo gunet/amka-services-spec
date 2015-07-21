@@ -19,6 +19,17 @@ the paths one may follow to accomplish particular tasks.
 2. An API client will search for a given SSN value in the collection of registered SSN's, optionally including some personal attributes for validation.
 3. An API client will request the personal attributes of a given registered SSN.
 
+## Media types in use
+
+Currently the API uses [Collection+JSON](http://amundsen.com/media-types/collection/) as 
+in it's responses.
+
+## Authentication
+
+API Authentication is provided via the standard `Authorization` HTTP header. Authentication methods supported include
+`Token` and `Signature`. The first method requires the client simply providing a shared secret, while
+the second method is implemented according to the [IETF http-signature](https://datatracker.ietf.org/doc/draft-cavage-http-signatures/) standard.
+
 # Home [/]
 This is the home resource. An API client
 
