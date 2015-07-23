@@ -5,18 +5,24 @@
   <descriptor id="ssn" name="ssn">
     <doc>The SSN value as text</doc>
   </descriptor>
-  <descriptor id="ssn-entry" name="ssn">
+  <descriptor id="ssn-entry" name="ssn" href="http://alps.io/schema.org/Number">
     <doc>An object representing a particular SSN entry in a collection
       accesible through URLs.</doc>
-    <descriptor id="ssn-value" href="#ssn"/>
+    <descriptor id="ssn-value" href="#ssn" rt="http://alps.io/schema.org/Text">
+        <doc>The currently valid SSN. An 11 digit number value. This number may
+            be different than the original number provided in the query.</doc>
+    </descriptor>
     <descriptor id="ssn-href" href="http://alps.io/schema.org/Thing#url"/>
+    <descriptor id="last-modified" type="semantic" rt="http://alps.io/schema.org/Date">
+        <doc format="html">
+            The date on which the SSN attributes were last modified.
+        </doc>
+    </descriptor>
+    <descriptor id="id-doc" type="semantic">
+        <doc>A description of an identity document for the person that holds this SSN.</doc>
+        <descriptor id="id-type" type="semantic" rt="http://alps.io/schema.org/Text">
+            <doc>The identity document type.</doc>
     <!-- 
-
-ΑΜΚΑ: του input string 
-
-ΑΜΚΑ: ισχύων 11 αριθμοί 
-
-Ημ/νία πιο πρόσφατης καταχώρησης των στοιχείων : dd/mm/yyyy 
 
 Κωδικός είδους ταυτότητας:  Τ = Ελλ. Αστυνομική
 
@@ -31,77 +37,66 @@
                             Λ = Ληξιαρχ. Πράξη Γενν.
 
                             Α = Άλλο παραστατικό 
-
-Αριθμός ταυτότητας 
-
-Έτος έκδοσης ταυτότητας 
-
-Χώρα υπηκοότητας 
-
-Κωδικός χώρας υπηκοότητας 
-
-Κωδικός φύλου: Α = Άρρεν,  Θ = Θήλυ 
-
-ΑΦΜ 
-
-Επώνυμο κατά τη γέννηση  
-
-(Ελληνικά) 
-
-Επώνυμο τρέχον 
-
-(ταυτότητας) (Ελληνικά) 
-
-Όνομα (Ελληνικά) 
-
-Πατρώνυμο (Ελληνικά) 
-
-Μητρώνυμο (Ελληνικά) 
-
-Επώνυμο κατά τη γέννηση  (Λατινικά) 
-
-Επώνυμο τρέχον (ταυτότητας)  (Λατινικά) 
-
-Όνομα (Λατινικά) 
-
-Πατρώνυμο (Λατινικά) 
-
-Μητρώνυμο (Λατινικά) 
-
-Ημ/νία γέννησης: dd/mm/yyyy 
-
-
-Ένδειξη πλασματικής ημ/νίας : Π = πλασματική
-
-Χώρα γέννησης 
-
-Κωδικός χώρας γέννησης 
-
-Δήμος γέννησης 
-
-Κωδικός Ελληνικού νομού γέννησης :  Είναι τα 4 πρώτα γράμματα του νομού
-
-Διεύθυνση:  οδός - αριθμός 
-
-Διεύθυνση:  δήμος ή πόλη 
-
-Διεύθυνση:  κωδικός νομού:  Είναι τα 4 πρώτα γράμματα του νομού
-
-Διεύθυνση:  Τ.Κ:  Ταχυδρομικός κώδικας 
-
-Χώρα διεύθυνσης 
-
-Κωδικός χώρας διεύθυνσης 
-
-Τηλέφωνο -1 
-
-Τηλέφωνο -2 
-
-Ένδειξη θανάτου: Θ = έχει αναγγελθεί θάνατος 
-                 Λ = έχει αναγγελθεί θάνατος με Ληξιαρχική πράξη
-
-Ημ/νία Θανάτου: dd/mm/yyyy
--->
+                            -->
+        </descriptor>
+        <descriptor id="id-number" type="semantic" rt="http://alps.io/schema.org/Text">
+            <doc>The unique number for this identity document</doc>
+        </descriptor>
+        <descriptor id="id-issued-date" type="semantic"  rt="http://alps.io/schema.org/Date">
+            <doc>The date this identity document was issued</doc>
+        </descriptor>
+    </descriptor>"
+    <descriptor id="citizenship" type="semantic" rt="http://alps.io/schema.org/Text">
+        <doc>The two-letter ISO 3166-1 alpha-2 country code of a country that the SSN holder is a citizen of</doc>
+    <descriptor>
+    <descriptor id="gender" type="semantic" rt="http://alps.io/schema.org/Text">
+        <doc format="html">Gender of the person.</doc>
+    </descriptor>
+    <descriptor id="greekTaxID" href="http://alps.io/schema.org/Person.xml#taxID"/>
+    <descriptor id="birthSurnameGreek" type="semantic" rt="http://alps.io/schema.org/Text">
+        <doc>The family name or surname of the person at birth in Greek.</doc>
+    </descriptor>
+    <descriptor id="familyNameGreek" type="semantic" rt="http://alps.io/schema.org/Text">
+        <doc>The current family name or surname of the person</doc>
+    </descriptor>
+    <descriptor id="givenNameGreek" type="semantic" rt="http://alps.io/schema.org/Text">
+        <doc>The given name or first name in Greek.</doc>
+    </descriptor>
+    <descriptor id="fatherNameGreek" type="semantic" rt="http://alps.io/schema.org/Text">
+        <doc>The name of the father in Greek.</doc>
+    </descriptor>
+    <descriptor id="motherNameGreek" type="semantic" rt="http://alps.io/schema.org/Text">
+        <doc>The name of the mother in Greek.</doc>
+    </descriptor>
+    <descriptor id="birthSurname" type="semantic" rt="http://alps.io/schema.org/Text">
+        <doc>The family name or surname of the person at birth.</doc>
+    </descriptor>
+    <descriptor id="familyName" type="semantic" rt="http://alps.io/schema.org/Text">
+        <doc>The current family name or surname of the person</doc>
+    </descriptor>
+    <descriptor id="givenName" type="semantic" rt="http://alps.io/schema.org/Text">
+        <doc>The given name or first name.</doc>
+    </descriptor>
+    <descriptor id="fatherName" type="semantic" rt="http://alps.io/schema.org/Text">
+        <doc>The name of the father.</doc>
+    </descriptor>
+    <descriptor id="motherName" type="semantic" rt="http://alps.io/schema.org/Text">
+        <doc>The name of the mother.</doc>
+    </descriptor>
+    <descriptor id="birthdate" href="http://alps.io/schema.org/Person#birthDate"/>
+    <descriptor id="fakeBirthDate" href="http://alps.io/schema.org/Boolean"/>
+    <descriptor id="birthCountry" type="semantic" rt="http://alps.io/schema.org/Text">
+        <doc>The two-letter ISO 3166-1 alpha-2 country code of a country that
+            the SSN holder was born in</doc>
+    </descriptor>
+    <descriptor id="birthMunicipality" type="semantic" rt="http://alps.io/schema.org/Text">
+        <doc>The name of the municipality the SSN holder was born in</doc>
+    </descriptor>
+    <descriptor id="birthRegionCode" type="semantic" rt="http://alps.io/schema.org/Text">
+        <doc>For birth places in Greece a code to identify the region, usually
+            the first 4 letters of the name of the administrative region.</doc> 
+    </descriptor>
+    <descriptor id="deathDate" href="http://alps.io/schema.org/Person#deathDate"/>
   </descriptor>
   <!-- a collection of SSN entries -->
   <descriptor id="ssn-collection" type="safe" name="ssn">
